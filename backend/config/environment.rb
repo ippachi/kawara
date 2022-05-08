@@ -7,12 +7,16 @@ require "sinatra/reloader"
 require "sinatra/json"
 require "oauth2"
 require "dotenv"
+require "rack"
+require "rack/session/redis"
 
 Dotenv.load(".env.development", ".env.development.local")
 
 module Kawara
   module Web
     class Application < Sinatra::Base
+      use Rack::Session::Redis
+
       configure :development do
         register Sinatra::Reloader
       end

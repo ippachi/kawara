@@ -8,6 +8,7 @@ gem "sinatra-contrib"
 gem "oauth2"
 gem "puma"
 gem "rake"
+gem "redis-rack"
 gem "sorbet-runtime"
 
 group :development do
