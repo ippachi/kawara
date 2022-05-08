@@ -41,10 +41,35 @@ module Sinatra
 end
 
 class Sinatra::Application < ::Sinatra::Base
+  include ::Sinatra::EngineTracking
+  include ::Sinatra::Capture
+  include ::Sinatra::ContentFor
+  include ::Sinatra::Cookies
+  include ::Sinatra::LinkHeader
+  include ::Sinatra::Streaming
+  include ::Sinatra::RequiredParams
+  include ::Sinatra::RespondWith::Helpers
+  extend ::Sinatra::Contrib::Common
+  extend ::Sinatra::ConfigFile
+  extend ::Sinatra::MultiRoute
+  extend ::Sinatra::Namespace
+  extend ::Sinatra::Namespace::SharedMethods
+  extend ::Sinatra::Namespace::BaseMethods
+  extend ::Sinatra::RespondWith
+  extend ::Sinatra::Reloader
+  extend ::Sinatra::Reloader::BaseMethods
+  extend ::Sinatra::Reloader::ExtensionMethods
+
   class << self
     def app_file; end
     def app_file=(val); end
     def app_file?; end
+    def environments; end
+    def environments=(val); end
+    def environments?; end
+    def ext_map; end
+    def ext_map=(val); end
+    def ext_map?; end
     def logging; end
     def logging=(val); end
     def logging?; end
@@ -52,9 +77,18 @@ class Sinatra::Application < ::Sinatra::Base
     def method_override=(val); end
     def method_override?; end
     def register(*extensions, &block); end
+    def reload_templates; end
+    def reload_templates=(val); end
+    def reload_templates?; end
+    def reloader; end
+    def reloader=(val); end
+    def reloader?; end
     def run; end
     def run=(val); end
     def run?; end
+    def template_engines; end
+    def template_engines=(val); end
+    def template_engines?; end
   end
 end
 
@@ -66,6 +100,7 @@ class Sinatra::Base
   include ::Rack::Utils
   include ::Sinatra::Helpers
   include ::Sinatra::Templates
+  include ::Sinatra::JSON
 
   def initialize(app = T.unsafe(nil), **kwargs); end
 
@@ -156,6 +191,12 @@ class Sinatra::Base
     def head(path, opts = T.unsafe(nil), &bk); end
     def helpers(*extensions, &block); end
     def inline_templates=(file = T.unsafe(nil)); end
+    def json_content_type; end
+    def json_content_type=(val); end
+    def json_content_type?; end
+    def json_encoder; end
+    def json_encoder=(val); end
+    def json_encoder?; end
     def layout(name = T.unsafe(nil), &block); end
     def link(path, opts = T.unsafe(nil), &bk); end
     def lock; end
@@ -312,11 +353,15 @@ module Sinatra::Delegator
   private
 
   def after(*args, **_arg1, &block); end
+  def after_reload(*args, **_arg1, &block); end
+  def also_reload(*args, **_arg1, &block); end
   def before(*args, **_arg1, &block); end
+  def config_file(*args, **_arg1, &block); end
   def configure(*args, **_arg1, &block); end
   def delete(*args, **_arg1, &block); end
   def development?(*args, **_arg1, &block); end
   def disable(*args, **_arg1, &block); end
+  def dont_reload(*args, **_arg1, &block); end
   def enable(*args, **_arg1, &block); end
   def error(*args, **_arg1, &block); end
   def get(*args, **_arg1, &block); end
@@ -325,6 +370,7 @@ module Sinatra::Delegator
   def layout(*args, **_arg1, &block); end
   def link(*args, **_arg1, &block); end
   def mime_type(*args, **_arg1, &block); end
+  def namespace(*args, **_arg1, &block); end
   def not_found(*args, **_arg1, &block); end
   def options(*args, **_arg1, &block); end
   def patch(*args, **_arg1, &block); end
@@ -332,6 +378,10 @@ module Sinatra::Delegator
   def production?(*args, **_arg1, &block); end
   def put(*args, **_arg1, &block); end
   def register(*args, **_arg1, &block); end
+  def remap_extensions(*args, **_arg1, &block); end
+  def rendering_method(*args, **_arg1, &block); end
+  def respond_to(*args, **_arg1, &block); end
+  def route(*args, **_arg1, &block); end
   def set(*args, **_arg1, &block); end
   def settings(*args, **_arg1, &block); end
   def template(*args, **_arg1, &block); end
