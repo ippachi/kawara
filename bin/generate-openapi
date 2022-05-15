@@ -1,0 +1,1 @@
+docker run --rm -v $PWD:/app openapitools/openapi-generator-cli:v5.4.0 generate -g typescript-fetch -i /app/backend/openapi.yaml -o /app/frontend/lib/openapi

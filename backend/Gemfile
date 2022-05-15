@@ -10,6 +10,7 @@ gem "puma"
 gem "rake"
 gem "redis-rack"
 gem "sorbet-runtime"
+gem "committee"
 
 group :development do
   gem "sorbet"

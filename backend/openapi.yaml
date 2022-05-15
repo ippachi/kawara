@@ -1,0 +1,22 @@
+openapi: "3.0.3"
+info:
+  title: "Kawara API definition"
+  version: "0.0.1"
+paths:
+  /auth/google/authorize_url:
+    get:
+      tags: [GoogleOauth2]
+      operationId: GetGoogleOauth2UathorizeURL
+      responses:
+        200:
+          description: "Return authorize url"
+          content:
+            application/json:
+              schema:
+                title: GetGoogleOauth2UathorizeURLResponse
+                type: object
+                required:
+                  - authorize_url
+                properties:
+                  authorize_url:
+                    type: string
