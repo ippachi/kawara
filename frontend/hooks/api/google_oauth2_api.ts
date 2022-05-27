@@ -2,7 +2,7 @@ import { GoogleOauth2Api, Configuration } from "lib/openapi"
 import { useQuery } from "react-query"
 
 const config = new Configuration({
-  basePath: process.env.API_BASE_PATH as string,
+  basePath: process.env.NEXT_PUBLIC_API_BASE_PATH,
   credentials: "include"
 })
 

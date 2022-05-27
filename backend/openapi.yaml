@@ -1,7 +1,9 @@
-openapi: "3.0.3"
+openapi: "3.1.0"
+
 info:
   title: "Kawara API definition"
   version: "0.0.1"
+
 paths:
   /auth/google/authorize_url:
     get:

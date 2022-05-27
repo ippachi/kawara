@@ -5,12 +5,14 @@ source "https://rubygems.org"
 gem "sinatra"
 gem "sinatra-contrib"
 
+gem "committee"
 gem "oauth2"
 gem "puma"
 gem "rake"
-gem "redis-rack"
 gem "sorbet-runtime"
-gem "committee"
+
+gem "redis-rack"
+gem "rack-cors"
 
 group :development do
   gem "sorbet"
